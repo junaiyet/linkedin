@@ -1,0 +1,21 @@
+.protfolio{
+    position: relative;
+}
+.main_item {
+    position: absolute;
+    top: 53px;
+    text-align: center;
+}
+.cover_img{
+    position: relative;
+}
+.cover_img .dot-icon{
+    position: absolute;
+    color: #0e6796;
+    right: 20px;
+    top: 10px;
+    font-size: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+
+}
