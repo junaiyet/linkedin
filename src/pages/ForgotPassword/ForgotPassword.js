@@ -32,7 +32,7 @@ const ForgotPassword = () => {
         <div className="bg-white p-4">
             <h3>Forgot Password</h3>
             { emailerror && 
-            <h3 className='text-info'>{emailerror}</h3>
+            <h3 className='text-infojun'>{emailerror}</h3>
             }
             <label htmlFor="">Enter Your Email</label>
             <input onChange={(e)=>setEmail(e.target.value)} type="text" className='form-control' />

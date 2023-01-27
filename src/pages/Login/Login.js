@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 // import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 import { getAuth, signInWithEmailAndPassword ,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userLoginInfo } from '../../Slices/userSlice';
 
 const Login = () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
+    const dispatch = useDispatch()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [emailerror,setEmailerror] = useState('')
@@ -43,8 +46,12 @@ const Login = () => {
         // }
 
         if (email && password && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)) {
-            signInWithEmailAndPassword(auth, email, password).then(()=>{
+            signInWithEmailAndPassword(auth, email, password)
+            .then((user)=>{
                 setSuccess("Login Succefull.");
+                // console.log("login user",user.user)
+                dispatch(userLoginInfo(user.user))
+                localStorage.setItem("userInfo",JSON.stringify(user))
                 setTimeout(()=>{
                     navigate('/home')
                 },2000)
