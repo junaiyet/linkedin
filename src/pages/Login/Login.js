@@ -122,7 +122,7 @@ const Login = () => {
         <br />
         <button className='btn btn-primary' onClick={handleSubmit}>Login</button>
         <button className='btn btn-primary ms-5'>
-            <Link to='/' className='text-white'>Sign id</Link>
+            <Link to='/' className='text-white'>Sign in</Link>
         </button>
         {/* <button className='btn btn-primary ms-3 '>
             <Link to='/forgot' className='text-white'>Forgot Password</Link>

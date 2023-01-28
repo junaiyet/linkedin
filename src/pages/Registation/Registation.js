@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
-import { getAuth, createUserWithEmailAndPassword,sendEmailVerification  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,sendEmailVerification ,updateProfile  } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import profile from '../../assets/default.png'
 
 const Registation = () => {
     const auth = getAuth();
@@ -51,15 +52,23 @@ const Registation = () => {
         // }
 
         if (email && name && password && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)) {
-            createUserWithEmailAndPassword(auth,email,password).then(()=>{
-                setSuccess("Registaion Succefull . Please varify your mail");
-                setEmail('')
-                setName('')
-                setPassword('')
-                sendEmailVerification(auth.currentUser)
-                setTimeout(()=>{
-                    navigate('/login')
-                })
+            createUserWithEmailAndPassword(auth,email,password).then((user)=>{
+                updateProfile(auth.currentUser, {
+                    displayName: name, photoURL: "../../assets/default.png"
+                  }).then(() => {
+                    setSuccess("Registaion Succefull . Please varify your mail");
+                    console.log(user);
+                    setEmail('')
+                    setName('')
+                    setPassword('')
+                    sendEmailVerification(auth.currentUser)
+                    setTimeout(()=>{
+                        navigate('/login')
+                    })
+                  }).catch((error) => {
+                    console.log(error)
+                  });
+               
 
             }).catch((error) => {
                 if (error.code.includes('auth/email-already-in-use')) {
