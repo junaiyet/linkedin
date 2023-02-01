@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 import { getAuth, createUserWithEmailAndPassword,sendEmailVerification ,updateProfile  } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import profile from '../../assets/default.png'
 
 const Registation = () => {
@@ -108,23 +108,26 @@ const Registation = () => {
             </div>
             <div className="from-group">
             <span style={{display:'block'}}>Password</span>
-            <input onChange={handlePassword} className="form-control" type={passwordShow?"text":"password"} value={password}/>
-            {
+            <input onChange={handlePassword} className="form-control password" type={passwordShow?"text":"password"} value={password}/>
+            {/* {
                 passwordShow? 
-                <AiOutlineEye onClick={()=>setPasswordShow(!passwordShow)} />
+                <AiOutlineEye  onClick={()=>setPasswordShow(!passwordShow)} />
                 :
-            <AiOutlineEyeInvisible onClick={()=>setPasswordShow(!passwordShow)}/>
+            <AiOutlineEyeInvisible  onClick={()=>setPasswordShow(!passwordShow)}/>
             }
             {
                 passworderror &&
                 <p>{passworderror}</p>
-            }
+            } */}
          
             </div>
         </div>
         <br />
         <br />
         <button className='btn btn-primary' onClick={handleSubmit}>Sign up</button>
+        <button className='btn btn-primary ms-2' >
+            <Link to="/login" className='text-white'>Login</Link>
+        </button>
 
     </div>
   )

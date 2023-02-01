@@ -1,10 +1,15 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-const ProtfolioModal = ({show,getCropData,handleClose,handleProfileUpload,Cropper,setCropper,image,profile,auth}) => {
+import { useSelector } from 'react-redux';
+
+
+const ProtfolioModal = ({setDescription,show,getCropData,handleClose,handleProfileUpload,Cropper,setCropper,image}) => {
+  const data = useSelector((state)=>state.userLoginInfo.userInfo.user)
 
 
   return (
+    
     <>
           <Modal
         show={show}
@@ -17,6 +22,7 @@ const ProtfolioModal = ({show,getCropData,handleClose,handleProfileUpload,Croppe
         </Modal.Header>
         <Modal.Body>
               <div className="input-group">
+                <span className="d-block w-100">Profile Image</span>
                 <input onChange={handleProfileUpload} type="file" className='form-control'/>
               </div>
               {image ? 
@@ -26,7 +32,7 @@ const ProtfolioModal = ({show,getCropData,handleClose,handleProfileUpload,Croppe
                 </div>
                :
               <div className="main_profile" >
-               <img className='img-fluid' style={{width: '100px',borderRadius:'50%'}} src={profile} alt="" />
+               <img className='img-fluid' style={{width: '100px',borderRadius:'50%'}} src={data.photoURL} alt="" />
                 </div>
 
             }
@@ -53,11 +59,14 @@ const ProtfolioModal = ({show,getCropData,handleClose,handleProfileUpload,Croppe
           />
 
               }
-              <div className="input-group my-3">
-                <input type="text" className='form-control'/>
-              </div>
-              <div className="input-group">
-                <input type="text"className='form-control' />
+              {/* <div className="input-group my-3">
+              <span className="d-block w-100">Profile Name</span>
+
+                <input type="text" className='form-control' defaultValue={data.displayName}/>
+              </div> */}
+              <div className="input-group  my-3">
+              <span className="d-block w-100">Profile Description</span>
+                <input type="text"className='form-control' onChange={setDescription} />
               </div>
         </Modal.Body>
         <Modal.Footer>

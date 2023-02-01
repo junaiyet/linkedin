@@ -17,13 +17,14 @@ const Home = () => {
 //  console.log(user);
  if (user.emailVerified) {
      setVarify(true)
-     dispatch(userLoginInfo(null))
-     localStorage.removeItem("userInfo")
+
  }
   })
   useEffect(()=>{
     if (!data) {  
       navigate("/login");
+      dispatch(userLoginInfo(null))
+      localStorage.removeItem("userInfo")
     } 
 
   }, [])
